@@ -86,7 +86,16 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
+  },
+  {
+    title: 'Professional Software Development in 2020',
+      date: 'May 3st, 2020',
+      firstParagraph: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
+  
+      secondParagraph: `The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham. `,
+  
+      thirdParagraph: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).`
+    }
 ];
 
 /*
@@ -114,3 +123,46 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+const articleDiv = document.querySelector('.article');
+
+function articleMaker ({ title, date, firstParagraph, secondParagraph, thirdParagraph }) {
+  const articleDiv = document.createElement('div');
+  const articleTitle = document.createElement('articleTitle');
+  const articleData = document.createElement('p');
+  const par1 = document.createElement('p');
+  const par2 = document.createElement('p');
+  const par3 = document.createElement('p');
+  const expandButton = document.createElement('span')
+
+  articleDiv.appendChild(articleTitle);
+  articleDiv.appendChild(articleData);
+  articleDiv.appendChild(par1);
+  articleDiv.appendChild(par2);
+  articleDiv.appendChild(par3);
+  articleDiv.appendChild(expandButton);
+
+  articleDiv.classList.add('article');
+  articleData.classList.add('date');
+  expandButton.classList.add('expandButton');
+
+  articleTitle.textContent = title;
+  articleData.textContent = date;
+  par1.textContent = firstParagraph;
+  par2.textContent = secondParagraph;
+  par3.textContent = thirdParagraph;
+  expandButton.textContent = '+';
+
+  expandButton.addEventListener('click', () => {
+    articleDiv.classList.toggle('article-open');
+  })
+
+  return articleDiv;
+}
+
+console.log(articleMaker(data));
+
+data.forEach(article => {
+  const newArticle = articleMaker(article);
+  document.querySelector('.articles').append(newArticle)
+})
